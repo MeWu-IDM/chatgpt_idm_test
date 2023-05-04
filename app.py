@@ -42,13 +42,16 @@ def server(input, output, session):
         print(question)
         if question != "":
             if 'OPENAI_API_KEY' not in os.environ:
+                if input.openai_api_key() == "":
+                    result.set({"answer": "Please enter your OpenAI API key", "sources": ""})
+                    return
                 os.environ['OPENAI_API_KEY'] = input.openai_api_key()
             result.set(ask_db(store, question, temperature))
 
     @output
     @render.text
     def answer():
-        sources = result()['sources'].replace(',', '\n')
+        sources = result()['sources'].replace(',', '\n ')
         return f" Answers:\n {result()['answer']} \n\n Sources:\n {sources}"
 
 
