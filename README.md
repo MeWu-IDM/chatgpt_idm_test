@@ -1,4 +1,4 @@
-##ChatGPT for your own contents
+## ChatGPT for your own contents
 this example is based on below tutorial:  
 https://blog.langchain.dev/tutorial-chatgpt-over-your-data/
 
