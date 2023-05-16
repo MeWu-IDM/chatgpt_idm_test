@@ -9,7 +9,7 @@ import argparse
 
 def ask_db(store, question, temperature=0.5):
     chain = RetrievalQAWithSourcesChain.from_chain_type(
-        llm=OpenAI(temperature=temperature),
+        llm=OpenAI(temperature=temperature, model_name="gpt-3.5-turbo"),
         chain_type="stuff",
         retriever=store.as_retriever(),
         return_source_documents=True

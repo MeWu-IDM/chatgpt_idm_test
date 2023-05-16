@@ -51,8 +51,9 @@ def server(input, output, session):
     @output
     @render.text
     def answer():
-        sources = result()['sources'].replace(',', '\n ')
-        return f" Answers:\n {result()['answer']} \n\n Sources:\n {sources}"
+        answers = result()['answer'].replace('. ', '.\n').replace(', ', '.\n').replace('!', '!\n')
+        sources = result()['sources'].replace(',', '\n')
+        return f"Answers:\n {answers} \n\nSources:\n {sources}"
 
 
 # Combine into a shiny app.

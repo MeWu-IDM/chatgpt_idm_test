@@ -2,6 +2,7 @@
 this example is based on below tutorial:  
 https://blog.langchain.dev/tutorial-chatgpt-over-your-data/
 
+![flow](flow.png)
 ## How to run
 - install requirements.txt
 - run command `shiny run app.py`
