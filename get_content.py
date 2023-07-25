@@ -58,25 +58,25 @@ def split_text(pages):
 
 
 if __name__ == "__main__":
-    # sitemaps= get_all_sitemaps()
-    # contents = get_all_site_contents(sitemaps)
-    # docs, metadatas = split_text(contents)
-    #
-    # with open('docs.pkl', 'wb') as f:
-    #     pickle.dump(docs, f)
-    # with open('metadatas.pkl', 'wb') as f:
-    #     pickle.dump(metadatas, f)
+    sitemaps= get_all_sitemaps()
+    contents = get_all_site_contents(sitemaps)
+    docs, metadatas = split_text(contents)
+
+    with open('docs.pkl', 'wb') as f:
+        pickle.dump(docs, f)
+    with open('metadatas.pkl', 'wb') as f:
+        pickle.dump(metadatas, f)
 
     docs = pickle.load(open('docs.pkl', 'rb'))
     metadatas = pickle.load(open('metadatas.pkl', 'rb'))
 
-    # os.environ['OPENAI_API_KEY'] = getpass.getpass('Enter your OpenAI API Key:')
+    os.environ['OPENAI_API_KEY'] = getpass.getpass('Enter your OpenAI API Key:')
     embeddings = OpenAIEmbeddings()
-    # store = FAISS.from_texts(docs, embeddings, metadatas=metadatas)
-    # store.save_local("idmstore")
-    # with open("faiss_store.pkl", "wb") as f:
-    #     pickle.dump(store, f)
-    #
+    store = FAISS.from_texts(docs, embeddings, metadatas=metadatas)
+    store.save_local("idmstore")
+    with open("faiss_store.pkl", "wb") as f:
+        pickle.dump(store, f)
+
     with open("faiss_store.pkl", "rb") as f:
         store = pickle.load(f)
 
