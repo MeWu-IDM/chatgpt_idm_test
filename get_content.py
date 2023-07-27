@@ -70,7 +70,8 @@ if __name__ == "__main__":
     docs = pickle.load(open('docs.pkl', 'rb'))
     metadatas = pickle.load(open('metadatas.pkl', 'rb'))
 
-    os.environ['OPENAI_API_KEY'] = getpass.getpass('Enter your OpenAI API Key:')
+    if 'OPENAI_API_KEY' not in os.environ:
+        os.environ['OPENAI_API_KEY'] = getpass.getpass('Enter your OpenAI API Key:')
     embeddings = OpenAIEmbeddings()
     store = FAISS.from_texts(docs, embeddings, metadatas=metadatas)
     store.save_local("idmstore")

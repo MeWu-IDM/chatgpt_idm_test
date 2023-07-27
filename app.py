@@ -51,8 +51,8 @@ def server(input, output, session):
     @output
     @render.text
     def answer():
-        answers = result()['answer'].replace('. ', '.\n').replace(', ', '.\n').replace('!', '!\n')
-        sources = result()['sources'].replace(',', '\n')
+        answers = result()['result'].replace('. ', '.\n').replace(', ', '.\n').replace('!', '!\n')
+        sources = "\n".join([r.metadata['source'] for r in result()['source_documents']])
         return f"Answers:\n {answers} \n\nSources:\n {sources}"
 
 
