@@ -31,7 +31,7 @@ def server(input, output, session):
     with open("faiss_store.pkl", "rb") as f:
         store = pickle.load(f)
 
-    result = reactive.Value({"answer": "", "sources": ""})
+    result = reactive.Value()
 
     @reactive.Effect
     @reactive.event(input.submit)
@@ -51,10 +51,13 @@ def server(input, output, session):
     @output
     @render.text
     def answer():
-        answers = result()['result'].replace('. ', '.\n').replace(', ', '.\n').replace('!', '!\n')
-        sources = "\n".join([r.metadata['source'] for r in result()['source_documents']])
-        return f"Answers:\n {answers} \n\nSources:\n {sources}"
+        if 'result' not in result():
+            return f"Unable to retrieve results, you may need to check your API_KEYS"
 
+        else:
+            answers = result()['result'].replace('. ', '.\n').replace(', ', '.\n').replace('!', '!\n')
+            sources = "\n".join([r.metadata['source'] for r in result()['source_documents']])
+            return f"Answers:\n {answers} \n\nSources:\n {sources}"
 
 # Combine into a shiny app.
 # Note that the variable must be "app".
